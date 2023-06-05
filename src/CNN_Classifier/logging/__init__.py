@@ -1,14 +1,19 @@
 import os
 import sys
 import logging
+from datetime import datetime
 
 logging_str = "[%(asctime)s: %(levelname)s: %(module)s: %(message)s]"
-logging_dir = "logs"
-log_filepath = os.path.join(logging_dir,"running_logs.log")
-os.makedirs(logging_dir,exist_ok=True)
+log_file = f"{datetime.now().strftime('%m_%d_%Y_%H_%M_%S')}.log"
+log_dir = "logs"
+log_filepath = os.path.join(os.getcwd(),log_dir,log_file)
+os.makedirs(log_dir,exist_ok=True)
+
+log_file_path = os.path.join(log_filepath,log_file)
 
 logging.basicConfig(
 
+    filename = log_file_path,
     level = logging.INFO,
     format = logging_str,
 
@@ -17,5 +22,3 @@ logging.basicConfig(
         logging.StreamHandler(sys.stdout)
     ]
 )
-
-logger = logging.getLogger("CNN_Classifier_Logger")
