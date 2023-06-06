@@ -13,11 +13,11 @@ from pathlib import Path
 
 
 @ensure_annotations
-def read_yaml(yaml_filepath:Path) -> ConfigBox:
+def read_yaml(path_to_yaml:Path) -> ConfigBox:
     try:
-        with open(yaml_filepath, 'r') as file_obj:
+        with open(path_to_yaml) as file_obj:
             content = yaml.safe_load(file_obj)
-            logging.info(f"yaml file: {yaml_filepath} loaded successfully")
+            logging.info(f"yaml file: {path_to_yaml} loaded successfully")
             return ConfigBox(content)
     except Exception as e:
         raise CustomException(e,sys)
